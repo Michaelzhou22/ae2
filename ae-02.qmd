@@ -1,7 +1,7 @@
 ---
 title: "Intro to statistics and plotting"
 subtitle: "STA 199"
-format: html
+format: pdf
 ---
 
 ## Bulletin
@@ -18,14 +18,24 @@ Clone *your* `ae-2-username` repo from the [GitHub organization](https://github.
 
 1.  Define *package*, *data frame*, *variable* and *observation*
 
+- packages: collection of function and data
+- data frame is an object that stores data and it has variables and observations. 
+- variables are columns of the data frame
+- observations are rows
+
 2.  What's a function?
     What's an argument?
 
--   `glimpse(data)`
--   `mean(x)`
--   `library(tidyverse)`
+-   `glimpse(data)`: glimpse is the function, data is the argument
+-   `mean(x)`, mean is the function, x is the argument
+-   `library(tidyverse)`, library is the function, tidyverse is the argument  
 
 3.  How do you print to the screen?
+
+```{r}
+x = 2
+x
+```
 
 ## Today
 
@@ -74,36 +84,46 @@ flint = read_csv("data/flint.csv")
 
 Look at the data, how many observations are there? How many variables?
 
+813 observations (rows) and 5 variables (columns)
+
 \[answer here\]
+```{r}
+glimpse(flint)
+nrow(flint)
+ncol(flint)
+```
 
 ### `distinct()` and `count()`
 
-Let's use `distinct` to find the number of different time points water was sampled.
+Let's use `distinct` to find the number of different time points water was sampled. 3 times the water is sampled.
 
 ```{r count-draws}
 distinct(flint, draw)
 ```
 
-How many unique homes are in the data set?
+How many unique homes are in the data set? 269 homes in the data set.
 
 ```{r count-homes}
 flint |>
   distinct(id)
+
+distinct(flint,id)
 ```
 
--   A note on pipes `|>` and `%>%`.
+-   A note on pipes `|>` and `%>%`. A pipe takes what comes before it and makes it the first argument of the following function. Read a pipe as "and then"
 
 ## Exercise 2
 
 Fill in the code to `count` how many samples were taken from each zip code. Un-comment the lines (i.e. remove the `#` before running the code)
 
 ```{r count-by-zip, echo = TRUE}
-# flint |>
- # count(______)
+flint |>
+ count(zip)
 ```
 
-Which ZIP code had the most samples drawn?
+Which ZIP code had the most samples drawn? 48503
 
+"Take the flint data set and then count the number of each zip code"
 
 ## Goal
 
@@ -148,6 +168,14 @@ Let's compute some of these statistics for `lead` ppb in `R`.
 
 ```{r statistics}
 # code here
+x = c(1, 2, 3)
+mean(x)
+sd(x)
+var(x)
+1/2 *((1-2)^2 + (2-2)^2 + (3-2)^2)
+
+mean(flint$lead)
+sd(flint$lead)
 ```
 
 ## Intro to plotting
